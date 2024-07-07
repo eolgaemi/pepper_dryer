@@ -18,7 +18,7 @@
 /* USER CODE END Header */
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
-#include <stdio.h>
+
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 
@@ -120,9 +120,26 @@ int main(void)
   // GPIOC, GPIO_LED0_GPIO_Port
   //volatile unsigned int * reg2 = 0x40011010;
   //char data[10] = {'a','b'};
-  char senddata[20] = "hello world\r\n";
+  //char senddata[20] = "hello world\r\n";
+  int button_state = 0;
   while (1)
   {
+
+	  if(!(HAL_GPIO_ReadPin(PB0_TEMP_SET_UP_GPIO_Port, PB0_TEMP_SET_UP_Pin))){
+		  HAL_GPIO_WritePin(PB6_LED1_GPIO_Port, PB6_LED1_Pin, 0);
+	  }else{
+		  HAL_GPIO_WritePin(PB6_LED1_GPIO_Port, PB6_LED1_Pin, 1);
+	  }
+	  HAL_Delay(500);
+	  /*
+	  printf("LED ON\r\n");
+	  HAL_GPIO_WritePin(PB6_LED1_GPIO_Port, PB6_LED1_Pin, 0);
+	  HAL_Delay(1000);
+
+	  printf("LED OFF\r\n");
+	  HAL_GPIO_WritePin(PB6_LED1_GPIO_Port, PB6_LED1_Pin, 1);
+	  HAL_Delay(1000);
+	  */
 	  /*
 	  *reg2 = 0x2000;
 	  HAL_Delay(100);
@@ -141,8 +158,10 @@ int main(void)
 	  HAL_Delay(1000);
 	  */
 	  //HAL_UART_Transmit(&huart1, senddata, strlen(senddata), 1000);
+	  /*
 	  printf("hello world printf\r\n");
 	  HAL_Delay(1000);
+	  */
 
 	  /*
 	  if (!HAL_GPIO_ReadPin(GPIO_SWITCH_GPIO_Port, GPIO_SWITCH_Pin)){
@@ -279,12 +298,16 @@ static void MX_GPIO_Init(void)
   /* GPIO Ports Clock Enable */
   __HAL_RCC_GPIOC_CLK_ENABLE();
   __HAL_RCC_GPIOA_CLK_ENABLE();
+  __HAL_RCC_GPIOB_CLK_ENABLE();
 
   /*Configure GPIO pin Output Level */
   HAL_GPIO_WritePin(GPIO_LED0_GPIO_Port, GPIO_LED0_Pin, GPIO_PIN_SET);
 
   /*Configure GPIO pin Output Level */
   HAL_GPIO_WritePin(GPIO_TEST_GPIO_Port, GPIO_TEST_Pin, GPIO_PIN_SET);
+
+  /*Configure GPIO pin Output Level */
+  HAL_GPIO_WritePin(PB6_LED1_GPIO_Port, PB6_LED1_Pin, GPIO_PIN_SET);
 
   /*Configure GPIO pin : GPIO_LED0_Pin */
   GPIO_InitStruct.Pin = GPIO_LED0_Pin;
@@ -305,6 +328,19 @@ static void MX_GPIO_Init(void)
   GPIO_InitStruct.Pull = GPIO_PULLUP;
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_HIGH;
   HAL_GPIO_Init(GPIO_TEST_GPIO_Port, &GPIO_InitStruct);
+
+  /*Configure GPIO pin : PB0_TEMP_SET_UP_Pin */
+  GPIO_InitStruct.Pin = PB0_TEMP_SET_UP_Pin;
+  GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
+  GPIO_InitStruct.Pull = GPIO_PULLUP;
+  HAL_GPIO_Init(PB0_TEMP_SET_UP_GPIO_Port, &GPIO_InitStruct);
+
+  /*Configure GPIO pin : PB6_LED1_Pin */
+  GPIO_InitStruct.Pin = PB6_LED1_Pin;
+  GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
+  GPIO_InitStruct.Pull = GPIO_PULLUP;
+  GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
+  HAL_GPIO_Init(PB6_LED1_GPIO_Port, &GPIO_InitStruct);
 
 /* USER CODE BEGIN MX_GPIO_Init_2 */
 /* USER CODE END MX_GPIO_Init_2 */
