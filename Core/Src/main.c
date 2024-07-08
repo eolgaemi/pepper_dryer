@@ -18,7 +18,8 @@
 /* USER CODE END Header */
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
-
+#include <stdio.h>
+#include "fnc_controller.h"
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 
@@ -89,7 +90,6 @@ int main(void)
 
   /* Configure the system clock */
   SystemClock_Config();
-
   /* USER CODE BEGIN SysInit */
 
   /* USER CODE END SysInit */
@@ -99,77 +99,35 @@ int main(void)
   MX_SPI1_Init();
   MX_USART1_UART_Init();
   /* USER CODE BEGIN 2 */
-
-  // Same COde MX_GPIO_Init()
-  /*
-  volatile unsigned int * reg = 0x40021018;
-  *reg |= 16;
-
-  GPIO_InitTypeDef GPIO_InitStruct = {0};
-  GPIO_InitStruct.Pin = GPIO_LED0_Pin;
-  GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
-  GPIO_InitStruct.Pull = GPIO_PULLDOWN;
-  GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_HIGH;
-  HAL_GPIO_Init(GPIO_LED0_GPIO_Port, &GPIO_InitStruct);
-   */
-
+  init_fnd();
   /* USER CODE END 2 */
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
-  // GPIOC, GPIO_LED0_GPIO_Port
-  //volatile unsigned int * reg2 = 0x40011010;
-  //char data[10] = {'a','b'};
-  //char senddata[20] = "hello world\r\n";
-  int button_state = 0;
   while (1)
   {
+	/*
+	// "CAFE"
+	send_port(0x86,0b0001);
+	send_port(0x8E,0b0010);
+	send_port(0x88,0b0100);
+	send_port(0xC6,0b1000);
+	 */
+	/*
+	// 0-99
+	for (int i = 0; i <= 99; i++) {
+		digit2_replay(i, 0b0001, 50); //send counter 0-99 with delay 50 cicles int 1st and 2nd view ports
+	}
+	*/
+	 /*
+	// 0-99
+	for (int i = 0; i <= 9999; i++) {
 
-	  if(!(HAL_GPIO_ReadPin(PB0_TEMP_SET_UP_GPIO_Port, PB0_TEMP_SET_UP_Pin))){
-		  HAL_GPIO_WritePin(PB6_LED1_GPIO_Port, PB6_LED1_Pin, 0);
-	  }else{
-		  HAL_GPIO_WritePin(PB6_LED1_GPIO_Port, PB6_LED1_Pin, 1);
-	  }
-	  HAL_Delay(500);
-	  /*
-	  printf("LED ON\r\n");
-	  HAL_GPIO_WritePin(PB6_LED1_GPIO_Port, PB6_LED1_Pin, 0);
-	  HAL_Delay(1000);
+		digit4_replay(i, 50); //send counter 0-9999 with delay 50 cicles and hide zero
 
-	  printf("LED OFF\r\n");
-	  HAL_GPIO_WritePin(PB6_LED1_GPIO_Port, PB6_LED1_Pin, 1);
-	  HAL_Delay(1000);
-	  */
-	  /*
-	  *reg2 = 0x2000;
-	  HAL_Delay(100);
-	  *reg2 = (0x2000 << 16);
-	  HAL_Delay(100);
-	  */
-	  // main.h -> GPIO_LED0
-	  /*
-	  HAL_SPI_Transmit(&hspi1, data, 2, 100);
-	  HAL_Delay(100);
-	  */
-	  /*
-	  HAL_GPIO_WritePin(GPIO_TEST_GPIO_Port, GPIO_TEST_Pin, 1);
-	  HAL_Delay(1000);
-	  HAL_GPIO_WritePin(GPIO_TEST_GPIO_Port, GPIO_TEST_Pin, 0);
-	  HAL_Delay(1000);
-	  */
-	  //HAL_UART_Transmit(&huart1, senddata, strlen(senddata), 1000);
-	  /*
-	  printf("hello world printf\r\n");
-	  HAL_Delay(1000);
-	  */
+	}
+	*/
 
-	  /*
-	  if (!HAL_GPIO_ReadPin(GPIO_SWITCH_GPIO_Port, GPIO_SWITCH_Pin)){
-		  HAL_GPIO_WritePin(GPIO_LED0_GPIO_Port, GPIO_LED0_Pin, 0);
-	  }else{
-		  HAL_GPIO_WritePin(GPIO_LED0_GPIO_Port, GPIO_LED0_Pin, 1);
-	  }
-	  */
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
@@ -307,7 +265,7 @@ static void MX_GPIO_Init(void)
   HAL_GPIO_WritePin(GPIO_TEST_GPIO_Port, GPIO_TEST_Pin, GPIO_PIN_SET);
 
   /*Configure GPIO pin Output Level */
-  HAL_GPIO_WritePin(PB6_LED1_GPIO_Port, PB6_LED1_Pin, GPIO_PIN_SET);
+  HAL_GPIO_WritePin(GPIOB, FND_SCLK_Pin|FND_RCLK_Pin|FND_DIO_Pin|PB6_LED1_Pin, GPIO_PIN_SET);
 
   /*Configure GPIO pin : GPIO_LED0_Pin */
   GPIO_InitStruct.Pin = GPIO_LED0_Pin;
@@ -334,6 +292,13 @@ static void MX_GPIO_Init(void)
   GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
   GPIO_InitStruct.Pull = GPIO_PULLUP;
   HAL_GPIO_Init(PB0_TEMP_SET_UP_GPIO_Port, &GPIO_InitStruct);
+
+  /*Configure GPIO pins : FND_SCLK_Pin FND_RCLK_Pin FND_DIO_Pin */
+  GPIO_InitStruct.Pin = FND_SCLK_Pin|FND_RCLK_Pin|FND_DIO_Pin;
+  GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
+  GPIO_InitStruct.Pull = GPIO_PULLUP;
+  GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_HIGH;
+  HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
 
   /*Configure GPIO pin : PB6_LED1_Pin */
   GPIO_InitStruct.Pin = PB6_LED1_Pin;

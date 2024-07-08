@@ -65,6 +65,12 @@ void Error_Handler(void);
 #define GPIO_TEST_GPIO_Port GPIOA
 #define PB0_TEMP_SET_UP_Pin GPIO_PIN_0
 #define PB0_TEMP_SET_UP_GPIO_Port GPIOB
+#define FND_SCLK_Pin GPIO_PIN_13
+#define FND_SCLK_GPIO_Port GPIOB
+#define FND_RCLK_Pin GPIO_PIN_14
+#define FND_RCLK_GPIO_Port GPIOB
+#define FND_DIO_Pin GPIO_PIN_15
+#define FND_DIO_GPIO_Port GPIOB
 #define PB6_LED1_Pin GPIO_PIN_6
 #define PB6_LED1_GPIO_Port GPIOB
 
