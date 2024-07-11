@@ -112,21 +112,67 @@ int main(void)
 	send_port(0x8E,0b0010);
 	send_port(0x88,0b0100);
 	send_port(0xC6,0b1000);
+
+
+	if(HAL_GPIO_ReadPin(PB0_TEMP_SET_UP_GPIO_Port, PB0_TEMP_SET_UP_Pin)){
+		HAL_GPIO_WritePin(PB6_LED1_GPIO_Port, PB6_LED1_Pin, 1);
+	}
+	else{
+		HAL_GPIO_WritePin(PB6_LED1_GPIO_Port, PB6_LED1_Pin, 0);
+	}
+	*/
+	/*
+	send(0xF8);		// 1111 1000
+	send(0b0001);	// 0000 0001
+	HAL_GPIO_WritePin(FND_RCLK_GPIO_Port,FND_RCLK_Pin,0);
+	HAL_GPIO_WritePin(FND_RCLK_GPIO_Port,FND_RCLK_Pin,1);
+	HAL_Delay(1000);
+	*/
+
+	 /*
+	 send_port(0b11111110,0b0001);
+	 HAL_Delay(1000);
+
+	 send_port(0b11111101,0b0001);
+	 HAL_Delay(1000);
+
+	 send_port(0b11111011,0b0001);
+	 HAL_Delay(1000);
+
+	 send_port(0b11110111,0b0001);
+	 HAL_Delay(1000);
+
+	 send_port(0b11101111,0b0001);
+	 HAL_Delay(1000);
+
+	 send_port(0b11011111,0b0001);
+	 HAL_Delay(1000);
+
+	 send_port(0b10111111,0b0001);
+	 HAL_Delay(1000);
+
+	 send_port(0b01111111,0b0001);
+	 HAL_Delay(1000);
 	 */
+
+
+
 	/*
 	// 0-99
 	for (int i = 0; i <= 99; i++) {
 		digit2_replay(i, 0b0001, 50); //send counter 0-99 with delay 50 cicles int 1st and 2nd view ports
 	}
 	*/
-	 /*
-	// 0-99
+
+	// 0-9999
+	/*
 	for (int i = 0; i <= 9999; i++) {
 
 		digit4_replay(i, 50); //send counter 0-9999 with delay 50 cicles and hide zero
 
 	}
 	*/
+	digit4_temperature(995,1);
 
     /* USER CODE END WHILE */
 

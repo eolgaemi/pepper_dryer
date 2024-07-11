@@ -2,9 +2,10 @@
 ../Core/Src/fnd_controller.c:50:6:send	24	static
 ../Core/Src/fnd_controller.c:68:6:send_port	16	static
 ../Core/Src/fnd_controller.c:75:6:digit4_show	48	static
-../Core/Src/fnd_controller.c:91:6:digit4_replay	16	static
-../Core/Src/fnd_controller.c:96:6:digit4	16	static
-../Core/Src/fnd_controller.c:101:6:digit4_showZero_replay	16	static
-../Core/Src/fnd_controller.c:106:6:digit4_showZero	16	static
-../Core/Src/fnd_controller.c:112:6:digit2_replay	40	static
-../Core/Src/fnd_controller.c:124:6:digit2_port	16	static
+../Core/Src/fnd_controller.c:91:6:digit4_temperature	32	static
+../Core/Src/fnd_controller.c:108:6:digit4_replay	16	static
+../Core/Src/fnd_controller.c:113:6:digit4	16	static
+../Core/Src/fnd_controller.c:118:6:digit4_showZero_replay	16	static
+../Core/Src/fnd_controller.c:123:6:digit4_showZero	16	static
+../Core/Src/fnd_controller.c:129:6:digit2_replay	40	static
+../Core/Src/fnd_controller.c:141:6:digit2_port	16	static
