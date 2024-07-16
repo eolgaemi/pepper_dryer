@@ -61,7 +61,6 @@ void send(uint8_t X){
 	X <<= 1;
 	HAL_GPIO_WritePin(FND_SCLK_GPIO_Port,FND_SCLK_Pin,HIGH);
 	HAL_GPIO_WritePin(FND_SCLK_GPIO_Port,FND_SCLK_Pin,LOW);
-
   }
 }
 
@@ -72,23 +71,8 @@ void send_port(uint8_t X, uint8_t port)
   HAL_GPIO_WritePin(FND_RCLK_GPIO_Port,FND_RCLK_Pin,LOW);
   HAL_GPIO_WritePin(FND_RCLK_GPIO_Port,FND_RCLK_Pin,HIGH);
 }
-void digit4_show(int n, int replay,  uint8_t showZero)
-{
-  int n1, n2, n3, n4;
-  n1 = (int)  n % 10;
-  n2 = (int) (n % 100)/10;
-  n3 = (int) (n % 1000)/100;
-  n4 = (int) (n % 10000)/1000;
 
- for(int i = 0; i<=replay; i++){
-	send_port(_LED_0F[n1], 0b0001);
-    if(showZero | n>9)send_port(_LED_0F[n2], 0b0010);
-    if(showZero | n>99)send_port(_LED_0F[n3], 0b0100);
-    if(showZero | n>999)send_port(_LED_0F[n4], 0b1000);
- }
-}
-
-void digit4_temperature(int n,uint8_t showZero)
+void digit4_show(int n, int replay,uint8_t showZero)
 {
   int n1, n2, n3, n4;
   n1 = (int)  n % 10;
@@ -97,13 +81,27 @@ void digit4_temperature(int n,uint8_t showZero)
   n4 = (int) (n % 10000)/1000;
 
   send_port(_LED_0F[n1], 0b0001);
-  if(showZero | n>9)send_port(_LED_0F[n2] & 0x7F, 0b0010);
+  if(showZero | n>9)send_port(_LED_0F[n2], 0b0010);
   if(showZero | n>99)send_port(_LED_0F[n3], 0b0100);
   if(showZero | n>999)send_port(_LED_0F[n4], 0b1000);
 
-
 }
 
+void digit4_temperature(int n,uint8_t showZero,int replay)
+{
+  int n1, n2, n3, n4;
+  n1 = (int)  n % 10;
+  n2 = (int) (n % 100)/10;
+  n3 = (int) (n % 1000)/100;
+  n4 = (int) (n % 10000)/1000;
+
+  for(int i = 0; i<=replay; i++){
+	  send_port(_LED_0F[n1], 0b0001);
+	  if(showZero | n>9)send_port(_LED_0F[n2] & 0x7F, 0b0010);
+	  if(showZero | n>99)send_port(_LED_0F[n3], 0b0100);
+	  if(showZero | n>999)send_port(_LED_0F[n4], 0b1000);
+  }
+}
 
 void digit4_replay(int n, int replay)
 {

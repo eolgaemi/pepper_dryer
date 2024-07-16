@@ -15,7 +15,7 @@ void digit4_replay(int n, int replay);
 void digit4(int n);
 void digit4_showZero_replay(int n, int replay);
 void digit4_showZero(int n);
-void digit4_temperature(int n,uint8_t showZero);
+void digit4_temperature(int n,uint8_t showZero,int replay);
 void digit2_replay(int n, int port, int replay);
 void digit2_port(int n, int port);
 

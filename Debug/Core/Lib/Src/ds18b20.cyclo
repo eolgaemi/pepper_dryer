@@ -1,0 +1,13 @@
+../Core/Lib/Src/ds18b20.c:25:6:Ds18b20_Init	7
+../Core/Lib/Src/ds18b20.c:59:6:Ds18b20_ManualConvert	7
+../Core/Lib/Src/ds18b20.c:168:9:DS18B20_Start	2
+../Core/Lib/Src/ds18b20.c:185:6:DS18B20_StartAll	1
+../Core/Lib/Src/ds18b20.c:195:6:DS18B20_Read	11
+../Core/Lib/Src/ds18b20.c:300:9:DS18B20_GetResolution	2
+../Core/Lib/Src/ds18b20.c:327:9:DS18B20_SetResolution	6
+../Core/Lib/Src/ds18b20.c:392:9:DS18B20_Is	2
+../Core/Lib/Src/ds18b20.c:401:9:DS18B20_SetAlarmLowTemperature	4
+../Core/Lib/Src/ds18b20.c:452:9:DS18B20_SetAlarmHighTemperature	4
+../Core/Lib/Src/ds18b20.c:503:9:DS18B20_DisableAlarmTemperature	2
+../Core/Lib/Src/ds18b20.c:549:9:DS18B20_AlarmSearch	1
+../Core/Lib/Src/ds18b20.c:555:9:DS18B20_AllDone	1

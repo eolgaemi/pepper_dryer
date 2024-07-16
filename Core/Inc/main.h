@@ -61,8 +61,8 @@ void Error_Handler(void);
 #define GPIO_LED0_GPIO_Port GPIOC
 #define GPIO_SWITCH_Pin GPIO_PIN_0
 #define GPIO_SWITCH_GPIO_Port GPIOA
-#define GPIO_TEST_Pin GPIO_PIN_3
-#define GPIO_TEST_GPIO_Port GPIOA
+#define PA3_TEMP_DATA_Pin GPIO_PIN_3
+#define PA3_TEMP_DATA_GPIO_Port GPIOA
 #define PB0_TEMP_SET_UP_Pin GPIO_PIN_0
 #define PB0_TEMP_SET_UP_GPIO_Port GPIOB
 #define FND_SCLK_Pin GPIO_PIN_13
