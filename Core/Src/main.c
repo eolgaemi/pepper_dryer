@@ -121,14 +121,7 @@ int main(void)
 	send_port(0x88,0b0100);
 	send_port(0xC6,0b1000);
 	*/
-	if(HAL_GPIO_ReadPin(PB0_TEMP_SET_UP_GPIO_Port, PB0_TEMP_SET_UP_Pin)){
-		HAL_GPIO_WritePin(PB6_LED1_GPIO_Port, PB6_LED1_Pin, 1);
-	}
-	else{
-		HAL_GPIO_WritePin(PB6_LED1_GPIO_Port, PB6_LED1_Pin, 0);
-	}
 
-	Ds18b20_ManualConvert();
 	/*
 	// 0-99
 	for (int i = 0; i <= 99; i++) {
@@ -141,6 +134,16 @@ int main(void)
 		digit4_temperature(i,1);//send counter 0-9999 with delay 50 cicles and hide zero
 	}
 	//*/
+
+	if(HAL_GPIO_ReadPin(PB0_TEMP_SET_UP_GPIO_Port, PB0_TEMP_SET_UP_Pin)){
+		HAL_GPIO_WritePin(PB6_LED1_GPIO_Port, PB6_LED1_Pin, 1);
+	}
+	else{
+		HAL_GPIO_WritePin(PB6_LED1_GPIO_Port, PB6_LED1_Pin, 0);
+	}
+
+	Ds18b20_ManualConvert();
+
 	int temp = (int)ds18b20[0].Temperature;
 	digit4_temperature(temp * 10,1,1);
     /* USER CODE END WHILE */
